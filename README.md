@@ -58,6 +58,7 @@ sonrasinda `redis-commander` i calistirip redisi takip edebilirsiniz.
 
 ---
 Proje ci\cd veya bir ara yuze sahip degildir.
+Worker'in [linki]('https://github.com/mesabuca/my-phishy-worker')
 
 # Postman istekleri
 Projeyi basit komutlarla test edebilmek icin gereken endpointler ve istekler assagida listelenmektedir. Proje restAPI'a uyumlu gelistirilmistir. Diger crud endpointlerde mevcuttur.
