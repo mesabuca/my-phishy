@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: phishy-worker-configmap
+  labels:
+    app: phishy-worker
+data:
+  NODE_ENV: production
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phishy-worker
+spec:
+  selector:
+   matchLabels:
+    app: phishy-worker
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: phishy-worker
+    spec:
+      containers:
+      - name: phishy-worker
+        image: docker.io/mesabuca/my-phishy-worker:1.0.0
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 3030
+        envFrom:
+        - configMapRef:
+            name: phishy-worker-configmap        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phishy-worker
+  labels:
+    app: phishy-worker
+spec:
+    ports:
+    - name: http
+      port: 80
+      targetPort: 3030
+    type: ClusterIP
+    selector:
+      app: phishy-worker

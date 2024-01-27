@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: phishy-configmap
+  labels:
+    app: phishy
+data:
+  NODE_ENV: production
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phishy
+spec:
+  selector:
+   matchLabels:
+    app: phishy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: phishy
+    spec:
+      initContainers:
+      - name: migrate
+        image: docker.io/mesabuca/my-phishy:1.0.0
+        command: ["sh", "-c", "npx sequelize-cli db:create && npx sequelize-cli db:migrate"]
+        envFrom:
+          - configMapRef:
+              name: phishy-configmap  
+      containers:
+      - name: phishy
+        image: docker.io/mesabuca/my-phishy:1.0.0
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: phishy-configmap   
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phishy
+  labels:
+    app: phishy
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 3000
+  type: ClusterIP
+  selector:
+    app: phishy

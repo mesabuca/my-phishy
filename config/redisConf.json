@@ -1,0 +1,10 @@
+{ 
+    "development": {
+        "host": "localhost",
+        "port": "6379"
+    },
+    "production": {
+        "host": "redis-service.redis.svc",
+        "port": "6379"
+    }
+}

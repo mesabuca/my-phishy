@@ -1,0 +1,30 @@
+{
+  "local": {
+    "username": "postgres",
+    "password": "your_password",
+    "database": "your_database",
+    "host": "postgres.postgres.svc",
+    "dialect": "postgres"
+  },
+  "development": {
+    "username": "root",
+    "password": "mypassword",
+    "database": "phishy",
+    "host": "postgres.postgres.svc",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "your_password",
+    "database": "your_database",
+    "host": "postgres.postgres.svc",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "root",
+    "password": "mypassword",
+    "database": "phishy",
+    "host": "postgres.postgres.svc", 
+    "dialect": "postgres"
+  }
+}
