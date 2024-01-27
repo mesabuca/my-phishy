@@ -1,14 +1,33 @@
+const redisUtils = require('../utils/redisUtils')
+const { sequelize } = require('../models/index')
+const env = process.env.NODE_ENV || 'development';
+const config = require('../config/config.json')[env];
+const Sequelize = require('sequelize');
+
 
 exports.status = (req, res) => {
     res.sendStatus(200);
   };
   
 exports.ready = (req, res) => {
-// Burada gerekli kontrolleri yapabilir ve duruma bağlı olarak 200 veya 500 döndürebilirsiniz.
-const isReady = true; // Örnek: PostgreSQL ve Redis bağlantılarını kontrol et
-if (isReady) {
+  // const errRedis = redisUtils.checkConnection
+  // const seq = new Sequelize(config.database, config.username, config.password, config);
+  // let errDb = ''
+  // seq
+  //     .authenticate()
+  //     .then(() => {
+  //     })
+  //     .catch((err) => {
+  //       console.error('Unable to connect to the PostgreSQL database:', err);
+  //       errDb = err
+  //     });
+
+  // if (errRedis) {
+  //   console.log('aksdjalksdasd');
+  //   res.sendStatus(errRedis);
+  // } else if (errDb) {
+  //   res.sendStatus(500);
+  // } else {
     res.sendStatus(200);
-} else {
-    res.sendStatus(500);
-}
+  // }
 };

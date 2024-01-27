@@ -7,10 +7,10 @@
     "dialect": "postgres"
   },
   "development": {
-    "username": "root",
-    "password": "mypassword",
+    "username": "postgres",
+    "password": "1234",
     "database": "phishy",
-    "host": "postgres.postgres.svc",
+    "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {

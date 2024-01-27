@@ -1,8 +1,5 @@
 const { Campaign, Target } = require('../models');
-const Bull = require('bull');
-const Redis = require('ioredis');
 const redisUtils = require('../utils/redisUtils');
-const target = require('../models/target');
 
 
 exports.getAllCampaigns = async () => {

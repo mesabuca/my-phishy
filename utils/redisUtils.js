@@ -1,12 +1,6 @@
-const Redis = require('ioredis');
-const Bull = require('bull')
+const { Queue, Bull } = require('bull')
 
 const redisConfig = require('../config/redisConf.json')[process.env.NODE_ENV || 'development'];
-
-const redisClient = new Redis({
-  host: redisConfig.host,
-  port: redisConfig.port,
-});
 
 exports.addCampaignQueue = async (campaignId, data) => {
     const bullQueue = new Bull(`campaigns`, { redis: redisConfig });
@@ -41,3 +35,16 @@ exports.setCampaignScheduleData = async (campaignId, delay) => {
         console.error('Error adding data to queue:', error);
     }
 };
+
+// exports.checkConnection = async () => {
+//     const myQueue = new Queue('test', { redis: redisConfig });
+//     let err = null
+//     myQueue.client.ping((err, result) => {
+//         if (err) {
+//           console.error('Unable to connect to the Redis server:', err);
+//         } else {
+//           console.log('Connected to Redis:', result);
+//         }
+//       });
+//     return err
+// }
